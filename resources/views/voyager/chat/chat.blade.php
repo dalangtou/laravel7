@@ -2,11 +2,11 @@
 @section('content')
 
 {{--    <link rel="shortcut icon" href="favicon.ico">--}}
-    <link href="{{resource_path('css/chat/bootstrap.min14ed.css')}}?v=3.3.6" rel="stylesheet">
-    <link href="{{resource_path('css/chat/font-awesome.min93e3.css')}}?v=4.4.0" rel="stylesheet">
-    <link href="{{resource_path('css/chat/style.min.css')}}" rel="stylesheet">
-    <link href="{{resource_path('css/chat/animate.min.css')}}" rel="stylesheet">
-    <link href="{{resource_path('css/chat/style.min862f.css')}}?v=4.1.0" rel="stylesheet">
+    <link href="{{asset('static/css/chat/bootstrap.min14ed.css')}}?v=3.3.6" rel="stylesheet">
+    <link href="{{asset('static/css/chat/font-awesome.min93e3.css')}}?v=4.4.0" rel="stylesheet">
+    <link href="{{asset('static/css/chat/style.min.css')}}" rel="stylesheet">
+    <link href="{{asset('static/css/chat/animate.min.css')}}" rel="stylesheet">
+    <link href="{{asset('static/css/chat/style.min862f.css')}}?v=4.1.0" rel="stylesheet">
 
     <!-- Mirrored from www.zi-han.net/theme/hplus/chat_view.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 20 Jan 2016 14:19:48 GMT -->
     {{--<head>
@@ -180,9 +180,9 @@
             </div>
         </div>
     </div>
-    <script src="{{resource_path('js/chat/jquery.min.js')}}?v=2.1.4"></script>
-    <script src="{{resource_path('js/chat/bootstrap.min.js')}}?v=3.3.6"></script>
-    <script src="{{resource_path('js/chat/content.min.js')}}?v=1.0.0"></script>
+    <script src="{{asset('static/js/chat/jquery.min.js')}}?v=2.1.4"></script>
+    <script src="{{asset('static/js/chat/bootstrap.min.js')}}?v=3.3.6"></script>
+    <script src="{{asset('static/js/chat/content.min.js')}}?v=1.0.0"></script>
     <script type="text/javascript" src="http://tajs.qq.com/stats?sId=9051096" charset="UTF-8"></script>
 {{--    </body>--}}
 

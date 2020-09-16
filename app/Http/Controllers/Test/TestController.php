@@ -14,7 +14,7 @@ class TestController extends Controller
     {
 //        $data = DB::table('test')->first();
 //        dd($data);
-        dd( resource_path('assets/sass/app.scss'));
+        dd( asset('js/chat/jquery.min.js'));
     }
 
     // voyager 搭建 https://learnku.com/articles/18704
