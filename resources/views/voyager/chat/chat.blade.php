@@ -7,6 +7,7 @@
     <link href="{{asset('static/css/chat/style.min.css')}}" rel="stylesheet">
     <link href="{{asset('static/css/chat/animate.min.css')}}" rel="stylesheet">
     <link href="{{asset('static/css/chat/style.min862f.css')}}?v=4.1.0" rel="stylesheet">
+    <link rel="stylesheet" href="{{ voyager_asset('css/app.css') }}">
 
     <!-- Mirrored from www.zi-han.net/theme/hplus/chat_view.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 20 Jan 2016 14:19:48 GMT -->
     {{--<head>
@@ -25,6 +26,48 @@
     </head>--}}
 
 {{--    <body class="gray-bg">--}}
+<?php
+$user_info = Auth::user();
+?>
+<style>
+    /*.chat-discussion .chat-message{*/
+    /*    width: 61.8%*/
+    /*}*/
+
+    .chat-discussion .chat-other .message-avatar {
+        float: left;
+        margin-right: 10px
+    }
+
+    .chat-discussion .chat-my .message-avatar {
+        float: right;
+        margin-left: 10px
+    }
+    .chat-discussion .chat-other .message-date {
+        float: right
+    }
+
+    .chat-discussion .chat-my .message-date {
+        float: left
+    }
+
+    .chat-discussion .chat-other .message {
+        text-align: left;
+        margin-left: 55px
+    }
+
+    .chat-discussion .chat-my .message {
+        text-align: right;
+        margin-right: 55px
+    }
+    .chat-item {
+        margin : 10px
+    }
+    /*.chat-item-item {*/
+    /*    width: 61.8%;*/
+    /*}*/
+</style>
+
     <div class="wrapper wrapper-content  animated fadeInRight">
 
         <div class="row">
@@ -44,9 +87,9 @@
                             <div class="col-md-9 ">
                                 <div class="chat-discussion">
 
-                                    <div class="chat-message">
-                                        <img class="message-avatar" src="img/a1.jpg" alt="">
-                                        <div class="message">
+                                    <div class="chat-item chat-my">
+                                        <img class="message-avatar" src="{{ asset('static/imgs').'/'.$user_info->avatar  }}" alt="">
+                                        <div class="message chat-item-item">
                                             <a class="message-author" href="#"> 颜文字君</a>
                                             <span class="message-date"> 2015-02-02 18:39:23 </span>
                                             <span class="message-content">
@@ -54,44 +97,22 @@
                                                 </span>
                                         </div>
                                     </div>
-                                    <div class="chat-message">
-                                        <img class="message-avatar" src="img/a4.jpg" alt="">
-                                        <div class="message">
+                                    <div class="chat-item chat-other">
+                                        <img class="message-avatar" src="{{ asset('static/imgs').'/'.$user_info->avatar  }}" alt="">
+                                        <div class="message chat-item-item">
                                             <a class="message-author" href="#"> 林依晨Ariel </a>
                                             <span class="message-date">  2015-02-02 11:12:36 </span>
                                             <span class="message-content">
                                                 jQuery表单验证插件 - 让表单验证变得更容易
-                                                </span>
-                                        </div>
-                                    </div>
-                                    <div class="chat-message">
-                                        <img class="message-avatar" src="img/a2.jpg" alt="">
-                                        <div class="message">
-                                            <a class="message-author" href="#"> 谨斯里 </a>
-                                            <span class="message-date">  2015-02-02 11:12:36 </span>
-                                            <span class="message-content">
-                                                验证日期格式(类似30/30/2008的格式,不验证日期准确性只验证格式
-                                                </span>
-                                        </div>
-                                    </div>
-                                    <div class="chat-message">
-                                        <img class="message-avatar" src="img/a5.jpg" alt="">
-                                        <div class="message">
-                                            <a class="message-author" href="#"> 林依晨Ariel </a>
-                                            <span class="message-date">  2015-02-02 - 11:12:36 </span>
-                                            <span class="message-content">
-                                                还有约79842492229个Bug需要修复
-                                                </span>
-                                        </div>
-                                    </div>
-                                    <div class="chat-message">
-                                        <img class="message-avatar" src="img/a6.jpg" alt="">
-                                        <div class="message">
-                                            <a class="message-author" href="#"> 林依晨Ariel </a>
-                                            <span class="message-date">  2015-02-02 11:12:36 </span>
-                                            <span class="message-content">
-                                                九部令人拍案叫绝的惊悚悬疑剧情佳作】如果你喜欢《迷雾》《致命ID》《电锯惊魂》《孤儿》《恐怖游轮》这些好片，那么接下来推荐的9部同类题材并同样出色的的电影，绝对不可错过哦~
-
+                                                jQuery表单验证插件 - 让表单验证变得更容易
+                                                jQuery表单验证插件 - 让表单验证变得更容易
+                                                jQuery表单验证插件 - 让表单验证变得更容易
+                                                jQuery表单验证插件 - 让表单验证变得更容易
+                                                jQuery表单验证插件 - 让表单验证变得更容易
+                                                jQuery表单验证插件 - 让表单验证变得更容易
+                                                jQuery表单验证插件 - 让表单验证变得更容易
+                                                jQuery表单验证插件 - 让表单验证变得更容易
+                                                jQuery表单验证插件 - 让表单验证变得更容易
                                                 </span>
                                         </div>
                                     </div>
@@ -105,57 +126,31 @@
 
                                     <div class="users-list">
                                         <div class="chat-user">
-                                            <img class="chat-avatar" src="img/a4.jpg" alt="">
+                                            <img class="chat-avatar" src="{{ asset('static/imgs').'/'.$user_info->avatar  }}" alt="">
                                             <div class="chat-user-name">
                                                 <a href="#">伤城Simple</a>
                                             </div>
                                         </div>
                                         <div class="chat-user">
-                                            <img class="chat-avatar" src="img/a1.jpg" alt="">
+                                            <img class="chat-avatar" src="{{ asset('static/imgs').'/'.$user_info->avatar  }}" alt="">
                                             <div class="chat-user-name">
                                                 <a href="#">从未出现过的风景__</a>
                                             </div>
                                         </div>
                                         <div class="chat-user">
                                             <span class="pull-right label label-primary">在线</span>
-                                            <img class="chat-avatar" src="img/a2.jpg" alt="">
+                                            <img class="chat-avatar" src="{{ asset('static/imgs').'/'.$user_info->avatar  }}" alt="">
                                             <div class="chat-user-name">
                                                 <a href="#">冬伴花暖</a>
                                             </div>
                                         </div>
                                         <div class="chat-user">
                                             <span class="pull-right label label-primary">在线</span>
-                                            <img class="chat-avatar" src="img/a3.jpg" alt="">
+                                            <img class="chat-avatar" src="{{ asset('static/imgs').'/'.$user_info->avatar  }}" alt="">
                                             <div class="chat-user-name">
                                                 <a href="#">ZM敏姑娘	</a>
                                             </div>
                                         </div>
-                                        <div class="chat-user">
-                                            <img class="chat-avatar" src="img/a5.jpg" alt="">
-                                            <div class="chat-user-name">
-                                                <a href="#">才越越</a>
-                                            </div>
-                                        </div>
-                                        <div class="chat-user">
-                                            <img class="chat-avatar" src="img/a6.jpg" alt="">
-                                            <div class="chat-user-name">
-                                                <a href="#">时光十年TENSHI</a>
-                                            </div>
-                                        </div>
-                                        <div class="chat-user">
-                                            <img class="chat-avatar" src="img/a2.jpg" alt="">
-                                            <div class="chat-user-name">
-                                                <a href="#">刘顰颖</a>
-                                            </div>
-                                        </div>
-                                        <div class="chat-user">
-                                            <span class="pull-right label label-primary">在线</span>
-                                            <img class="chat-avatar" src="img/a3.jpg" alt="">
-                                            <div class="chat-user-name">
-                                                <a href="#">陈泳儿SccBaby</a>
-                                            </div>
-                                        </div>
-
 
                                     </div>
 
@@ -190,5 +185,8 @@
 @stop
 
 @section('javascript')
+    <script>
+
+    </script>
 
 @stop
