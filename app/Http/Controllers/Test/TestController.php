@@ -14,7 +14,7 @@ class TestController extends Controller
     {
 //        $data = DB::table('test')->first();
 //        dd($data);
-        dd(! preg_match("/^[A-Za-z0-9]+$/", '868812345678901'));
+        dd(route('voyager.chat'));
     }
 
     // voyager 搭建 https://learnku.com/articles/18704

@@ -30,6 +30,11 @@ Route::namespace('App\Http\Controllers')->group(function () {
     });
 });
 
+Route::group(['prefix'=>'interface','as' => 'ajax.','namespace'=>'App\Http\Controllers\Interfaces'],function (){
+
+    Route::get('user_list', ['uses'=>'UserController@user_list','as'=>'u_l']);
+});
+
 
 Route::group(['prefix' => 'admin'], function () {
 //    Voyager::routes();

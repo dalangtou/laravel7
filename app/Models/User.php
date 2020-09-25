@@ -37,4 +37,11 @@ class User extends \TCG\Voyager\Models\User
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    const CHAT_LIST_FIELD = ['id','name','email','avatar'];
+
+    public function getUserAvatarAttribute()
+    {
+        return avatar_url($this->avatar);
+    }
 }

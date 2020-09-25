@@ -125,32 +125,6 @@ $user_info = Auth::user();
 
 
                                     <div class="users-list">
-                                        <div class="chat-user">
-                                            <img class="chat-avatar" src="{{ asset('static/imgs').'/'.$user_info->avatar  }}" alt="">
-                                            <div class="chat-user-name">
-                                                <a href="#">伤城Simple</a>
-                                            </div>
-                                        </div>
-                                        <div class="chat-user">
-                                            <img class="chat-avatar" src="{{ asset('static/imgs').'/'.$user_info->avatar  }}" alt="">
-                                            <div class="chat-user-name">
-                                                <a href="#">从未出现过的风景__</a>
-                                            </div>
-                                        </div>
-                                        <div class="chat-user">
-                                            <span class="pull-right label label-primary">在线</span>
-                                            <img class="chat-avatar" src="{{ asset('static/imgs').'/'.$user_info->avatar  }}" alt="">
-                                            <div class="chat-user-name">
-                                                <a href="#">冬伴花暖</a>
-                                            </div>
-                                        </div>
-                                        <div class="chat-user">
-                                            <span class="pull-right label label-primary">在线</span>
-                                            <img class="chat-avatar" src="{{ asset('static/imgs').'/'.$user_info->avatar  }}" alt="">
-                                            <div class="chat-user-name">
-                                                <a href="#">ZM敏姑娘	</a>
-                                            </div>
-                                        </div>
 
                                     </div>
 
@@ -186,7 +160,128 @@ $user_info = Auth::user();
 
 @section('javascript')
     <script>
+        $(document).ready(function(){
+            $.ajax({
+                url:"{{route('ajax.u_l')}}",
+                success:function(result){
+                    if (result.status_code === 200) {
+                        var html = '';
+                        result.data.forEach(function(e){
+                            html+='<div class="chat-user" id="uid_'+(e.id)+'">' +
+                                '<span class="pull-right label label-primary">在线</span>' +
+                                '<img class="chat-avatar" src="'+e.avatar+'" alt="">' +
+                                '<div class="chat-user-name">' +
+                                '<a href="#">'+e.name+'</a>' +
+                                '</div>' +
+                                '</div>';
+                        });
+                        $(".users-list").html(html);
+                    }
+                }});
+        });
 
+        $(function(){
+//在预定义函数中增加对 textarea的监听
+            addListtenr();
+        });
+
+        /*增加监听*/
+        function addListtenr(){
+            $("textarea").each(function(index) {
+                $("textarea")[index].addEventListener('keydown',function(e){
+                    if(e.keyCode!=13){
+                        return;
+                    }else{//当按键输入为回车时，执行下列操作
+                        event.preventDefault();//为了兼容IE8
+                        e.returnValue = false;
+                        e = $(this).val()+'\n';//手动增加换行符
+                        console.log(e);
+                        // $(this).val(e).focus();//定义焦点还是在这个控件上
+                    }
+                });
+            });
+        }
+
+        var My_uid = '{{$user_info->id}}';
+        var My_name = '{{$user_info->name}}';
+
+        try {
+            // 假设服务端ip为127.0.0.1
+            ws = new WebSocket('ws://{{env('WORKER_MAN_CONNECT')}}');
+        }catch (e) {
+            console.log(e)
+        }
+
+        //开启心跳
+        var Timer_work = setInterval(function () {
+            if(checkWS()){
+                var info = {};
+                info['type']=0;
+                info['i']=My_uid;
+
+                // console.log(JSON.stringify( info ));
+                ws_send(info);
+            }
+        }, 55000);
+
+        ws.onopen = function() {
+            alert("连接成功");
+            var info = {};
+            info['type']=0;
+            info['i']=My_uid;
+
+            ws_send(info);
+        };
+        ws.onmessage = function(e) {
+            console.log(e.data);
+            alert("收到服务端的消息：" + e.data);
+        };
+
+        //随机用户id //后续token验权
+        function random(min, max) {
+            return Math.floor(Math.random() * (max - min)) + min;
+        }
+
+        function checkWS() {
+            if (ws.readyState === WebSocket.OPEN) {
+                return true;
+            }
+            return false;
+        }
+
+        function myFunction1() {
+            if(checkWS()){
+                // alert("成功");
+            }else{
+                alert("socket 未连接");
+                return false;
+            }
+
+            var uid = $('#u1').val();
+            var message = $('#m1').val();
+
+            var info = {};
+            info['type']=1;
+            info['message']=message;
+            info['i']=My_uid;
+            info['to_uid']=uid;
+            // console.log(info);
+            ws_send(info);
+        }
+
+        function ws_send(message) {
+            message = JSON.stringify( message );
+            ws.send(message);
+        }
+
+        function myFunction2() {
+            close_work();
+        }
+
+        function close_work() {
+            clearInterval(Timer_work);
+            ws.close()
+        }
     </script>
 
 @stop
