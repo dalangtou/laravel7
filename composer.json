@@ -15,7 +15,7 @@
         "guzzlehttp/guzzle": "^7.0.1",
         "laravel/framework": "^8.0",
         "laravel/tinker": "^2.0",
-        "tcg/voyager": "^1.4",
+        "tcg/voyager": "^1.4.2",
         "workerman/workerman": "^3.5"
     },
     "require-dev": {
