@@ -192,11 +192,18 @@ $user_info = Auth::user();
                     if(e.keyCode!=13){
                         return;
                     }else{//当按键输入为回车时，执行下列操作
-                        event.preventDefault();//为了兼容IE8
-                        e.returnValue = false;
-                        e = $(this).val()+'\n';//手动增加换行符
-                        console.log(e);
-                        // $(this).val(e).focus();//定义焦点还是在这个控件上
+                        if(checkWS()){
+                            event.preventDefault();//为了兼容IE8
+                            e.returnValue = false;
+                            content = $(this).val()+'\n';//手动增加换行符
+
+                            console.log(content);
+                            send_message_before(content);
+                            // $(this).html('');
+                            // $(this).val(e).focus();//定义焦点还是在这个控件上
+                        }else{
+                            alert('服务器未连接');
+                        }
                     }
                 });
             });
@@ -204,6 +211,8 @@ $user_info = Auth::user();
 
         var My_uid = '{{$user_info->id}}';
         var My_name = '{{$user_info->name}}';
+        var to_uid = '{{$user_info->id == 1 ? 4 : 1}}';
+        var to_name = '{{$user_info->name == '刀刀' ? 'Admin' : '刀刀'}}';
 
         try {
             // 假设服务端ip为127.0.0.1
@@ -212,6 +221,15 @@ $user_info = Auth::user();
             console.log(e)
         }
 
+        function send_message_before(content) {
+            var info = {};
+            info['type']=1;
+            info['i']=My_uid;
+            info['to_uid']=to_uid;
+            info['message']=content;
+            console.log(info);
+            ws_send(info);
+        }
         //开启心跳
         var Timer_work = setInterval(function () {
             if(checkWS()){
@@ -249,29 +267,14 @@ $user_info = Auth::user();
             return false;
         }
 
-        function myFunction1() {
+        function ws_send(message) {
             if(checkWS()){
-                // alert("成功");
+                message = JSON.stringify( message );
+                ws.send(message);
             }else{
                 alert("socket 未连接");
                 return false;
             }
-
-            var uid = $('#u1').val();
-            var message = $('#m1').val();
-
-            var info = {};
-            info['type']=1;
-            info['message']=message;
-            info['i']=My_uid;
-            info['to_uid']=uid;
-            // console.log(info);
-            ws_send(info);
-        }
-
-        function ws_send(message) {
-            message = JSON.stringify( message );
-            ws.send(message);
         }
 
         function myFunction2() {

@@ -118,12 +118,11 @@ class Workerman extends Command
                          */
                         $this->worker->uidConnections[$uid] = $connection;
 
-                        Log::info('work',$this->worker->uidConnections);
 //                return;
                     }
-
                     $this->worker->sphygmus[$uid] = time(); // 脚本每隔55s 请求一次  60s无响应自动断开
 
+                    Log::info('work',$this->worker->uidConnections);
                     break;
                 case 1://用户之间聊天
                     if (isset($data['to_uid'])){
