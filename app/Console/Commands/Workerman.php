@@ -14,7 +14,7 @@ class Workerman extends Command
      *
      * @var string
      */
-    protected $signature = 'command:workerman';
+    protected $signature = 'command:workerman {action} {--daemonize}';
 
     //心跳间距  超过服务器主动断开连接
     const HEARTBEAT_TIME = 60;
@@ -24,7 +24,7 @@ class Workerman extends Command
      *
      * @var string
      */
-    protected $description = 'Command description';
+    protected $description = 'Command workerman-description';
 
     /**
      * @var Worker
@@ -39,12 +39,6 @@ class Workerman extends Command
     public function __construct()
     {
         parent::__construct();
-
-        // 创建一个Worker监听2345端口，使用http协议通讯
-        $this->worker = new Worker('websocket://'.env('WORKER_MAN_CONNECT'));
-
-        // 启动4个进程对外提供服务
-        $this->worker->count = 4;
     }
 
     /**
@@ -54,6 +48,17 @@ class Workerman extends Command
      */
     public function handle()
     {
+        global $argv;//定义全局变量
+        $arg = $this->argument('action');
+        $argv[1] = $arg;
+        $argv[2] = $this->option('daemonize') ? '-d' : '';//该参数是以daemon（守护进程）方式启动
+
+        // 创建一个Worker监听2345端口，使用http协议通讯
+        $this->worker = new Worker('websocket://'.env('WORKER_MAN_CONNECT'));
+
+        // 启动4个进程对外提供服务
+        $this->worker->count = 4;
+
         $this->worker->sphygmus = [];
 
         $this->worker->onWorkerStart = function($worker)
