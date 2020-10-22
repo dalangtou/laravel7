@@ -53,8 +53,8 @@ class Workerman extends Command
         $argv[1] = $arg;
         $argv[2] = $this->option('daemonize') ? '-d' : '';//该参数是以daemon（守护进程）方式启动
 
-        // 创建一个Worker监听2345端口，使用http协议通讯
-        $this->worker = new Worker('websocket://'.env('WORKER_MAN_CONNECT'));
+        // 创建一个Worker监听xx端口，使用http协议通讯
+        $this->worker = new Worker('websocket://127.0.0.1:10101');
 
         // 启动4个进程对外提供服务
         $this->worker->count = 4;
