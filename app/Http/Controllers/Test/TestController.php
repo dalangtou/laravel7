@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Test;
 
 use App\Http\Controllers\Controller;
+use App\Jobs\AfterLogin;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
@@ -14,7 +15,11 @@ class TestController extends Controller
     {
 //        $data = DB::table('test')->first();
 //        dd($data);
-        dd(route('voyager.chat'));
+//        $a = new AfterLogin(['name'=>'张三','content'=>'张三info']);
+//        dispatch($a);
+
+        
+        dd('sss');
     }
 
     // voyager 搭建 https://learnku.com/articles/18704
