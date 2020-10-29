@@ -1,7 +1,9 @@
 <?php
+
 namespace App\Extro;
 
 use Predis\Client;
+use Predis\Connection\Parameters;
 
 /**
  * All the commands exposed by the client generally have the same signature as
@@ -134,7 +136,7 @@ use Predis\Client;
  * @method mixed       evalsha($script, $numkeys, $keyOrArg1 = null, $keyOrArgN = null)
  * @method mixed       script($subcommand, $argument = null)
  * @method mixed       auth($password)
- * @method string      echo($message)
+ * @method string      echo ($message)
  * @method mixed       ping($message = null)
  * @method mixed       select($database)
  * @method mixed       bgrewriteaof()
@@ -159,7 +161,8 @@ use Predis\Client;
  * @method array       georadiusbymember($key, $member, $radius, $unit, array $options = null)
  *
  */
-class Redis {
+class Redis extends Client
+{
 
     /*
      * @var Client $client
@@ -169,14 +172,42 @@ class Redis {
 
     public function __construct()
     {
-        $this->client = new Client();
-        $client->set('foo', 'bar');
-        $value = $client->get('foo');
-    }
+        $param = config('database.redis.my_redis');
 
-    public function __call($name, $arguments)
-    {
-        return $this->client->$name($arguments);
+        parent::__construct($param);
     }
 
 }
+
+
+//自定义类 魔术方法调用
+//class Redis
+//{
+//
+//    protected $client;
+//
+//
+//    public function __construct()
+//    {
+//        $param = config('database.redis.my_redis');
+//
+//        $this->client = new Client($param);
+////        parent::__construct($param);
+//
+//    }
+//
+//    public function __call($name, $arguments)
+//    {
+//
+//        return call_user_func_array(array($this->client, $name), $arguments);
+//    }
+//
+//    //多次实例化 适用一次获取
+//    public static function __callStatic($name, $arguments)
+//    {
+//        $self = new self();
+//
+//        return call_user_func_array(array($self->client, $name), $arguments);
+//    }
+//
+//}
