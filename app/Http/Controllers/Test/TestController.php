@@ -26,5 +26,16 @@ class TestController extends Controller
         dd($value);
     }
 
+    public function testApi(Request $request)
+    {
+        $data = DB::table('test')->first();
+
+        if($data->status == 1) {
+            return response_json(['aa'=>11,'bb'=>22]);
+        } else {
+            return response_json(1001, 'fail');
+        }
+    }
+
     // voyager 搭建 https://learnku.com/articles/18704
 }
