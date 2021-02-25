@@ -48,8 +48,8 @@ class Workerman extends Command
      */
     public function handle()
     {
-        // header("Access-Control-Allow-Origin: *"); // 允许任意域名发起的跨域请求   
-        // header('Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept'); 
+        // header("Access-Control-Allow-Origin: *"); // 允许任意域名发起的跨域请求
+        // header('Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept');
         // header('Access-Control-Allow-Methods: GET, POST, PUT,OPTIONS');
 
         global $argv;//定义全局变量

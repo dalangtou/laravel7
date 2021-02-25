@@ -26,8 +26,8 @@ Route::get('/', function () {
 Route::namespace('App\Http\Controllers')->group(function () {
 
     Route::namespace('Test')->prefix('test')->group(function () {
-        Route::get('connect', 'TestController@connect');
-        Route::get('testApi', 'TestController@testApi');
+        Route::any('connect', 'TestController@connect');
+        Route::any('testApi', 'TestController@testApi');
     });
 });
 

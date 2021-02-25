@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Jobs\AfterLogin;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Route;
 
 class TestController extends Controller
@@ -30,11 +31,25 @@ class TestController extends Controller
     {
         $data = DB::table('test')->first();
 
+        $param = $request->all();
+
+        Log::info('被请求。。',[date('Y-m-d H:i:s'),$param]);
+
+
         if($data->status == 1) {
-            return response_json(['aa'=>11,'bb'=>22]);
+            $res = [
+                'code'=>200,
+                'message'=>'success',
+                'data'=>new \stdClass(),
+            ];
         } else {
-            return response_json(1001, 'fail');
+            $res = [
+                'code'=>1001,
+                'message'=>'fail',
+                'data'=>new \stdClass(),
+            ];
         }
+        return response()->json($res);
     }
 
     // voyager 搭建 https://learnku.com/articles/18704
